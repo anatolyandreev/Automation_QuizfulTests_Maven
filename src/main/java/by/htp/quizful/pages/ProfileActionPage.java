@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,7 +29,7 @@ public class ProfileActionPage extends BasePage {
 
 	@FindBy(xpath = "//div[@class='title']/b[text()='Уведомления']")
 	private WebElement notificationsBar;
-	
+
 	@FindBy(xpath = "//div[@class='title']/b[text()='Конфиденциальность']")
 	private WebElement privacyBar;
 
@@ -52,12 +53,12 @@ public class ProfileActionPage extends BasePage {
 
 	@FindBy(xpath = "//input[@name='personalForm.save']")
 	private WebElement personalDataSaveButton;
-	
+
 	@FindBy(xpath = "//input[@name='notificationsForm.save']")
 	private WebElement notificationsSaveButton;
-	
+
 	@FindBy(xpath = "//input[@name='privacyForm.save']")
-	private WebElement privacySaveButton;	
+	private WebElement privacySaveButton;
 
 	@FindBy(xpath = "//select[@name='personalForm.countryId']")
 	private WebElement countrySelectField;
@@ -76,19 +77,25 @@ public class ProfileActionPage extends BasePage {
 
 	@FindBy(xpath = "//select[@name='personalForm.zone']/*")
 	private List<WebElement> timeZoneOptionsList;
-	
+
 	@FindBy(xpath = "//div[@id='profile-notifications-form']//*[contains(@name, '.notifications')]")
 	private WebElement notificationsCheckbox;
-	
+
 	@FindBy(xpath = "//div[@id='profile-notifications-form']//*[contains(@name, '.delivery')]")
 	private WebElement deliveryCheckbox;
-	
+
 	@FindBy(xpath = "//input[@name='privacyForm.profileVisibility' and @value='closed']")
 	private WebElement onlyMeRadioButton;
-	
-	@FindBy(xpath="//a[@href='/LoginAction.doLogout']")
+
+	@FindBy(xpath = "//a[@href='/LoginAction.doLogout']")
 	private WebElement logoutButton;
-	
+
+	@FindBy(xpath = "//input[@name='personalForm.avatar']")
+	private WebElement selectFileButton;
+
+	@FindBy(xpath = "//a[@href='/ProfileAction.deleteAvatar']")
+	private WebElement deleteAvatarButton;
+
 	private String countryOptionRegExp = "//select[@name='personalForm.countryId']/option[text()='%s']";
 	private String cityOptionRegExp = "//select[@name='personalForm.cityId']/option[text()='%s']";
 	private String timeZoneOptionRegExp = "//select[@name='personalForm.zone']/option[text()='%s']";
@@ -111,7 +118,7 @@ public class ProfileActionPage extends BasePage {
 	public void expandNotifications() {
 		notificationsBar.click();
 	}
-	
+
 	public void expandPrivacy() {
 		privacyBar.click();
 	}
@@ -143,11 +150,11 @@ public class ProfileActionPage extends BasePage {
 	public void clickPersonalDataSaveButton() {
 		personalDataSaveButton.click();
 	}
-	
+
 	public void clickNotificationosFormSaveButton() {
 		notificationsSaveButton.click();
 	}
-	
+
 	public void clickPrivacyFormSaveButton() {
 		new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOf(privacySaveButton)).click();
 	}
@@ -224,43 +231,63 @@ public class ProfileActionPage extends BasePage {
 		aboutInputField.clear();
 	}
 
-	public void clickNotificationsCheckbox(){
+	public void clickNotificationsCheckbox() {
 		new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOf(notificationsCheckbox)).click();
 	}
-	
-	public void clickDeliveryCheckbox(){
+
+	public void clickDeliveryCheckbox() {
 		new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOf(deliveryCheckbox)).click();
 	}
-	
-	public boolean isCheckboxEnabled(WebElement checkbox){
-		if (checkbox.getAttribute("checked") != null){
+
+	public boolean isCheckboxEnabled(WebElement checkbox) {
+		if (checkbox.getAttribute("checked") != null) {
 			return true;
 		}
 		return false;
 	}
-	
-	public boolean isNotificationsCheckboxEnabled(){
+
+	public boolean isNotificationsCheckboxEnabled() {
 		return isCheckboxEnabled(notificationsCheckbox);
 	}
-	
-	public boolean isDeliveryCheckboxEnabled(){
+
+	public boolean isDeliveryCheckboxEnabled() {
 		return isCheckboxEnabled(deliveryCheckbox);
 	}
-	
-	public boolean isOnlyMeRadioButtonEnabled(){
-		if (onlyMeRadioButton.getAttribute("checked") != null){
+
+	public boolean isOnlyMeRadioButtonEnabled() {
+		if (onlyMeRadioButton.getAttribute("checked") != null) {
 			return true;
 		}
 		return false;
 	}
-	
-	public void clickOnlyMeRadioButton(){
+
+	public void clickOnlyMeRadioButton() {
 		new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOf(onlyMeRadioButton)).click();
 
 	}
-	
-	public void clickLogoutButton(){
+
+	public void clickLogoutButton() {
 		logoutButton.click();
 	}
 
+	public void clickSelectFileButton() {
+		selectFileButton.click();
+	}
+	
+	public WebElement getSelectFileButton(){
+		return selectFileButton;
+	}
+
+	public void clickDeleteAvatarButton() {
+		new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOf(deleteAvatarButton)).click();
+	}
+
+	public boolean isDeleteAvatarButtonPresent() {
+		try {
+			deleteAvatarButton.isDisplayed();
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+		return true;
+	}
 }

@@ -1,5 +1,7 @@
 package by.htp.quizful.steps;
 
+import java.io.File;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.SendKeysAction;
 import org.openqa.selenium.logging.profiler.ProfilerLogEntry;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -211,5 +215,28 @@ public class Steps {
 		if (profileActionPage.isOnlyMeRadioButtonEnabled())
 			return true;
 		return false;
+	}
+
+	public void uploadAvatar() {
+		profileActionPage = new ProfileActionPage(driver);
+		if (!profileActionPage.isDeleteAvatarButtonPresent()) {
+			File file = new File("src/test/resources/files/avatar.png");
+			profileActionPage.getSelectFileButton().sendKeys(file.getAbsolutePath());
+			profileActionPage.clickPersonalDataSaveButton();
+		}
+	}
+
+	public boolean isAvatarUploaded() {
+		profileActionPage = new ProfileActionPage(driver);
+		if (profileActionPage.isDeleteAvatarButtonPresent())
+			return true;
+		return false;
+	}
+
+	public void deleteAvatar() {
+		profileActionPage = new ProfileActionPage(driver);
+		profileActionPage.clickDeleteAvatarButton();
+		new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
+		driver.switchTo().alert().accept();
 	}
 }

@@ -81,4 +81,18 @@ public class QuizfulTests {
 	  steps.clearPersonalData();
   }
   
+  @Test
+  public void checkTheAvatarUpload() {
+	  steps.loginToTheSystem(testLogin, testPassword);
+	  assertEquals(steps.getUserNicknameFromUserPanel(), testLogin);
+	  steps.openUserProfile();
+	  steps.openEditProfileScreen();
+	  steps.expandPersonalInfoSection();
+	  steps.uploadAvatar();
+	  steps.openEditProfileScreen();
+	  steps.expandPersonalInfoSection();
+	  assertTrue(steps.isAvatarUploaded(), "There is no \"delete avatar\" button, look like avatar is not uploaded");
+	  steps.deleteAvatar();
+  }
+  
 }

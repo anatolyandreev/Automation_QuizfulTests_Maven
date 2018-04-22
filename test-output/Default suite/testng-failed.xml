@@ -6,7 +6,7 @@
       <class name="by.htp.quizful.QuizfulTests">
         <methods>
           <include name="testSetup"/>
-          <include name="checkPersonalDataSaved"/>
+          <include name="checkTheAvatarUpload"/>
           <include name="afterTest"/>
         </methods>
       </class> <!-- by.htp.quizful.QuizfulTests -->
