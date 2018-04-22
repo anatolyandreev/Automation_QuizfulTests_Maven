@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="100816" started-at="2018-04-22T12:36:32Z" finished-at="2018-04-22T12:38:13Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="100816" started-at="2018-04-22T12:36:32Z" finished-at="2018-04-22T12:38:13Z">
+      <class name="by.htp.quizful.QuizfulTests">
+        <test-method status="PASS" signature="testSetup()[pri:0, instance:by.htp.quizful.QuizfulTests@7f9a81e8]" name="testSetup" is-config="true" duration-ms="4147" started-at="2018-04-22T15:36:32Z" finished-at="2018-04-22T15:36:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetup -->
+        <test-method status="PASS" signature="checkPersonalDataSaved()[pri:0, instance:by.htp.quizful.QuizfulTests@7f9a81e8]" name="checkPersonalDataSaved" duration-ms="95990" started-at="2018-04-22T15:36:36Z" finished-at="2018-04-22T15:38:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkPersonalDataSaved -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:by.htp.quizful.QuizfulTests@7f9a81e8]" name="afterTest" is-config="true" duration-ms="664" started-at="2018-04-22T15:38:12Z" finished-at="2018-04-22T15:38:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- by.htp.quizful.QuizfulTests -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
