@@ -1,6 +1,8 @@
 package by.htp.quizful;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 import static by.htp.quizful.data.RandomDataSet.*;
 
 import java.util.ArrayList;
@@ -60,6 +62,21 @@ public class QuizfulTests {
 	  steps.fillPersonalDataSection(RANDOM_NAME, RANDOM_SURNAME, RANDOM_YEAR, RANDOM_SITE, RANDOM_COMPANY, RANDOM_ABOUT);
 	  assertEquals(steps.getActualPersonalData(), getExpectedDataList());
 	  steps.openEditProfileScreen();
+	  steps.expandNotificationsBar();
+	  steps.disableNotifications();
+	  steps.openEditProfileScreen();
+	  steps.expandPrivacyBar();
+	  steps.selectOnlyMePrivacyOption();
+	  
+	  steps.signOut();
+	  steps.loginToTheSystem(testLogin, testPassword);
+	  steps.openUserProfile();
+	  steps.openEditProfileScreen();
+	  steps.expandNotificationsBar();
+	  assertFalse(steps.isOneOfNotificationCheckboxesEnabled(), "Either one of notifications checkboxes is enabled or both");
+	  steps.expandPrivacyBar();
+	  assertTrue(steps.isOnlyMeOptionIsSelected(), "\"Only me\" option is not selected");
+	  
 	  steps.expandPersonalInfoSection();
 	  steps.clearPersonalData();
   }
